@@ -1,0 +1,108 @@
+{% extends "dies/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  {% if item == None %}
+  <div class="container mt-5 pt-5">
+    <h1 class="mt-5 text-center">PART ID <br> DON'T EXIST</h1>
+  </div>
+  {% else %}
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-4 pr-0">
+        Part ID
+      </div>
+      <div class="col-8 pl-0 pr-0">
+        <div class="border border-secondary rounded text-center font-weight-bold" style="font-size: 1.25em;">
+          {{item.part_id}}
+        </div>
+      </div>
+    </div>
+    <hr class="mt-1 mb-1">
+    <div class="row">
+      <div class="col-4 pr-0">
+        Part No
+      </div>
+      <div class="col-8 pl-0 pr-0">
+        <div class="border border-secondary rounded text-center font-weight-bold" style="font-size: 1.25em;">
+          {{item.part_number}}
+        </div>
+      </div>
+    </div>
+    <hr class="mt-1 mb-1">
+    <div class="row">
+      <div class="col-6 pr-0">
+        Model Applicator
+      </div>
+      <div class="col-6 pr-0">
+        <div class="border border-secondary rounded text-center font-weight-bold" style="font-size: 1.25em;">
+          {{item.model_id}}
+        </div>
+      </div>
+    </div>
+    <hr class="mt-1 mb-1">
+    <div class="row">
+      <div class="col-5">
+        Car Model
+      </div>
+      <div class="col-7 pl-0 pr-0">
+        <div class="border border-secondary rounded text-center font-weight-bold" style="font-size: 1.25em;">
+          {{item.car_model}}
+        </div>
+      </div>
+    </div>
+    <hr class="mt-1 mb-1">
+    <div class="row">
+      <div class="col-5">
+        Machine No
+      </div>
+      <div class="col-7 pl-0 pr-0">
+        <div class="border border-secondary rounded text-center font-weight-bold" style="font-size: 1.25em;">
+          {{item.machine_no}}
+        </div>
+      </div>
+    </div>
+    <hr class="mt-1 mb-1">
+    <div class="row">
+      <div class="col-5">
+        Mfg. Div
+      </div>
+      <div class="col-7 pl-0 pr-0">
+        <div class="border border-secondary rounded text-center font-weight-bold" style="font-size: 1.25em;">
+          {{item.mfg_div}}
+        </div>
+      </div>
+    </div>
+    <hr class="mt-1 mb-1">
+    <div class="row">
+      <div class="col-5">
+        Status
+      </div>
+      <div class="col-7 pl-0 pr-0">
+        <div class="border border-secondary rounded text-center font-weight-bold" style="font-size: 1.25em;">
+          {% if item.status_id == True %}
+            <span class="text-success">Available</span>
+          {% else %}
+            <span class="text-danger">Un-Available</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+    
+    {% if item.status_id == True %}
+
+    {% else %}
+    
+    {% endif %}
+
+  <script>
+    $(document).ready(function(){
+      if ("{{item}}" == "None"){
+        setTimeout(function(){window.location.href = "{% url 'super_data_input' %}";}, 3000);
+      }
+    });
+
+  </script>
+
+{% endblock content %}

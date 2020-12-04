@@ -1,0 +1,208 @@
+{% extends "dies/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="container">
+    <div class="row mt-4 mb-0">
+      <button id="entity_button" class="btn btn-outline-primary btn-block font-weight-bold"  data-toggle="modal" data-target="#entityModal" data-backdrop="false" >
+        {% comment %} ENTITY {% endcomment %}
+      </button>
+    </div>
+    <hr class="mt-2">
+    <div class="input-group">
+      <input type="text" class="form-control input font-weight-bold" style="font-size: 1.25em;" placeholder="PART ID">
+      <div class="input-group-append">
+        {% comment %} <button id="search_part_id_btn" class="btn btn-outline-success font-weight-bold pb-0 pt-0 pl-3 pr-3" style="font-size: 1.5em;">&check;</button> {% endcomment %}
+        <button id="clear_part_id_btn" class="btn btn-outline-danger font-weight-bold pb-0 pt-0 pl-2 pr-2" style="font-size: 1.5em;">&times;</button>
+      </div>
+    </div>
+    <div class="numpad container">
+      <div class="row justify-content-center">
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">1</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">2</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">3</button>
+      </div>
+      <div class="row justify-content-center">
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">4</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">5</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">6</button>
+      </div>
+      <div class="row justify-content-center">
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">7</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">8</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">9</button>
+      </div>
+      <div class="row justify-content-center">
+        <button class="del btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">X</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">0</button>
+        <button id="search_part_id_btn" class="btn btn-success rounded m-2 font-weight-bold" style="font-size: 1.4em;">&check;</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal For Entity -->
+  <div class="modal fade" id="entityModal" tabindex="-1" role="dialog" aria-labelledby="entityModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="height: 400px;">
+        <div class="modal-header">
+          <h5 class="modal-title">ENTITY</h5>
+          <button class="close btn" data-dismiss="modal" aria-label="Close">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body pt-5">
+            <div class="row mt-4 mb-4">
+              <div class="col-6">
+                <button class="btn btn-danger btn-block font-weight-bold" style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                  YTM
+                </button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-primary btn-block font-weight-bold" style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                  YTP
+                </button>
+              </div>
+            </div>
+            <hr>
+            <div class="row mt-4 mb-4">
+              <div class="col-6">
+                <button class="btn btn-success btn-block font-weight-bold" style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                  YTC
+                </button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-warning btn-block font-weight-bold text-light" style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                  YTL
+                </button>
+              </div>
+            </div>
+            <hr>
+            <div class="row mt-4 mb-4">
+              <div class="col-4 p-0 pl-2 pr-2">
+                <button class="btn btn-secondary btn-block font-weight-bold " style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                  T-T
+                </button>
+              </div>
+              <div class="col-4 p-0 pl-2 pr-2">
+                <button class="btn btn-info btn-block font-weight-bold " style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                  TYC
+                </button>
+              </div>
+              <div class="col-4 p-0 pl-2 pr-2">
+                <button class="btn btn-dark btn-block font-weight-bold " style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                  TYP
+                </button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="alertdiva" class="w-75 p-2 alert alert-danger" style="text-align: center; font-weight: bold; height: 40px; position: absolute; top: 180px; left: 40px; z-index: 10;">
+  Please Select an ENTITY
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $(".numpad").hide();
+      $("#alertdiva").hide();
+      $('#entity_button').html("ENTITY");
+      $('.input').click(function(){
+        var entity = $('#entity_button').text().replace(/ /g,'').replace('\n', '');
+        if (entity == "ENTITY"){
+          $('#alertdiva').show().fadeOut(4000);
+          $('.numpad').hide();
+        } else {
+          $('.numpad').fadeToggle('fast');
+        }
+      });
+      $('.del').click(function(){
+        $('.input').val($('.input').val().substring(0,$('.input').val().length - 1));
+      });
+      $('.shuffle').click(function(){
+        $('.input').val($('.input').val() + $(this).text());
+      });
+      $('#search_part_id_btn').click(function(){
+        {% comment %} alert($('.input').val()); {% endcomment %}
+        window.location.href="{% url 'part_id_details' part_id=1 %}".replace(/1/, $('.input').val().toString());
+      })
+      $('#clear_part_id_btn').click(function() {
+        $('.input').val("");
+        $('#entity_button').html("ENTITY");
+        $('.numpad').fadeOut('fast');
+      });        
+    });
+
+
+    function entityChange(val) {
+      var value = $(val).text().replace(/ /g,'').replace('\n', '');
+      $('#entity_button').html(value);
+      $('.input').val(value + "CD");
+      $('.numpad').show('5000');
+    }
+  </script>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+<div class="col-6">
+  <button id="model_button"  class="btn btn-outline-danger btn-block font-weight-bold"  data-toggle="modal" data-target="#modelModal" data-backdrop="false" >
+    MODEL
+  </button>
+</div>
+
+<!-- Modal For Model -->
+  <div class="modal fade" id="modelModal" tabindex="-1" role="dialog" aria-labelledby="modelModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="height: 400px;">
+        <div class="modal-header">
+          <h5 class="modal-title">MODEL</h5>
+          <button class="close btn" data-dismiss="modal" aria-label="Close">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body pt-5">
+            <div class="row mt-5 mb-5">
+              <div class="col-6">
+                <button class="btn btn-danger btn-block font-weight-bold" style="font-size:1em;" data-dismiss="modal" onclick="modelChange(this)" >
+                  04
+                </button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-primary btn-block font-weight-bold" style="font-size:1em;" data-dismiss="modal" onclick="modelChange(this)" >
+                  87
+                </button>
+              </div>
+            </div>
+            <hr>
+            <div class="row mt-5 mb-5">
+              <div class="col-6">
+                <button class="btn btn-success btn-block font-weight-bold" style="font-size:1em;" data-dismiss="modal" onclick="modelChange(this)" >
+                  90
+                </button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-warning btn-block font-weight-bold text-light" style="font-size:1em;" data-dismiss="modal" onclick="modelChange(this)" >
+                  K2
+                </button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div> {% endcomment %}
