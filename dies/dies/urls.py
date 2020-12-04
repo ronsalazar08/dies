@@ -17,5 +17,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage, name='homepage'),
     path('supermarket/', include('super_market.urls')),
-    # path('supermarket/', views.supermarket, name='supermarket'),
+    path('sparemarket/', include('spare_market.urls')),
 ]

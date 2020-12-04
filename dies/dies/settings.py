@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'dies',
     'super_market',
+    'spare_market',
 ]
 
 MIDDLEWARE = [
