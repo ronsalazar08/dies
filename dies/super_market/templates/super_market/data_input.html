@@ -3,7 +3,7 @@
 {% block content %}
   <div class="container">
     <div class="row mt-4 mb-0">
-      <button id="entity_button" class="btn btn-outline-primary btn-block font-weight-bold"  data-toggle="modal" data-target="#entityModal" data-backdrop="false" >
+      <button id="entity_button" class="btn btn-primary btn-block font-weight-bold"  data-toggle="modal" data-target="#entityModal" data-backdrop="false" >
         {% comment %} ENTITY {% endcomment %}
       </button>
     </div>
@@ -12,29 +12,29 @@
       <input type="text" class="form-control input font-weight-bold" style="font-size: 1.25em;" placeholder="PART ID">
       <div class="input-group-append">
         {% comment %} <button id="search_part_id_btn" class="btn btn-outline-success font-weight-bold pb-0 pt-0 pl-3 pr-3" style="font-size: 1.5em;">&check;</button> {% endcomment %}
-        <button id="clear_part_id_btn" class="btn btn-outline-danger font-weight-bold pb-0 pt-0 pl-2 pr-2" style="font-size: 1.5em;">&times;</button>
+        <button id="clear_part_id_btn" class="btn border font-weight-bold pb-0 pt-0 pl-2 pr-2" style="font-size: 1.5em;">&times;</button>
       </div>
     </div>
     <div class="numpad container">
       <div class="row justify-content-center">
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">1</button>
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">2</button>
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">3</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">1</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">2</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">3</button>
       </div>
       <div class="row justify-content-center">
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">4</button>
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">5</button>
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">6</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">4</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">5</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">6</button>
       </div>
       <div class="row justify-content-center">
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">7</button>
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">8</button>
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">9</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">7</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">8</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">9</button>
       </div>
       <div class="row justify-content-center">
-        <button class="del btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">X</button>
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="font-size: 1.4em;">0</button>
-        <button id="search_part_id_btn" class="btn btn-success rounded m-2 font-weight-bold" style="font-size: 1.4em;">&check;</button>
+        <button class="del btn btn-danger rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">X</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">0</button>
+        <button id="search_part_id_btn" class="btn btn-success rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">&check;</button>
       </div>
     </div>
   </div>
@@ -123,9 +123,8 @@
         $('.input').val($('.input').val() + $(this).text());
       });
       $('#search_part_id_btn').click(function(){
-        {% comment %} alert($('.input').val()); {% endcomment %}
         window.location.href="{% url 'part_id_details' part_id=1 %}".replace(/1/, $('.input').val().toString());
-      })
+      });
       $('#clear_part_id_btn').click(function() {
         $('.input').val("");
         $('#entity_button').html("ENTITY");
