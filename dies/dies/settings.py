@@ -27,7 +27,7 @@ SECRET_KEY = 'qpmis0_g*#e2sk(92uq9rd#^pm49alhskfdexol07&2dmhy!t6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.44.1.230']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.44.1.230', '192.168.18.17']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'dies',
     'super_market',
     'spare_market',
+    'inventory',
 ]
 
 MIDDLEWARE = [

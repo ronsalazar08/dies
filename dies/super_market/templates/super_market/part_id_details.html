@@ -2,10 +2,10 @@
 {% load crispy_forms_tags %}
 {% block content %}
   {% if item == None %}
-  <div class="container mt-5 pt-5">
-    <h3 class="mt-5 text-center font-weight-bold border border-danger rounded pt-2 pb-2">{{p_id}}</h3>
-    <h4 class="text-center text-danger font-weight-bold">DON'T EXIST</h4>
-  </div>
+    <div class="container mt-5 pt-5">
+      <h3 class="mt-5 text-center font-weight-bold border border-danger rounded pt-2 pb-2">{{p_id}}</h3>
+      <h4 class="text-center text-danger font-weight-bold">DON'T EXIST</h4>
+    </div>
   {% else %}
     <div class="container mt-3">
       <div class="row">
@@ -92,28 +92,60 @@
     </div>
     
     <div class="container mt-5">
+      <div class="row mt-3">
+        <div class="col-6 pl-0">
+          <button id="common_button" class="btn btn-info btn-block font-weight-bold" data-toggle="modal" data-target="#commonModal" data-backdrop="false">
+            COMMON TO
+          </button>
+        </div>
+        <div class="col-6 pr-0">
+          <button id="back_button" class="btn btn-danger btn-block font-weight-bold">
+            BACK
+          </button>
+        </div>
+      </div>
       {% if item.status_id == True %}
-        <div class="row">
+        <div class="row  mt-3">
           <button id="claim_button" class="btn btn-primary btn-block font-weight-bold">
             CLAIM
           </button>
         </div>
       {% else %}
-        <div class="row">
+        <div class="row  mt-3">
           <button class="btn btn-outline-primary btn-block font-weight-bold disabled">
             CLAIM
           </button>
         </div>
       {% endif %}
-      <div class="row mt-3">
-        <button id="back_button" class="btn btn-danger btn-block font-weight-bold">
-          BACK
-        </button>
-      </div>
     </div>
 
   {% endif %}
 
+
+
+    <!-- Modal For common -->
+    <div class="modal fade" id="commonModal" tabindex="-1" role="dialog" aria-labelledby="commonModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">COMMON PART ID</h5>
+            <button class="close btn" data-dismiss="modal" aria-label="Close">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body" style="font-size: 1.3em;">
+            {% for c in common %}
+              <div class="row pt-0 pb-0" >
+                <div class="col-12 text-center">
+                  {{forloop.counter}}. <span class="font-weight-bold">{{c.part_id}}</span>
+                <div>
+              </div>
+              <hr>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
   <script>
     $(document).ready(function(){
       if ("{{item}}" == "None"){

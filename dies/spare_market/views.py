@@ -1,29 +1,51 @@
 from django.shortcuts import render
 
-from .models import *
+from spare_market.models import records as spare_records
+from super_market.models import records as super_records
 
 def data_input(request):
     return render(request, 'spare_market/data_input.html')
 
 
 def details(request, part_number):
+    olo = part_number.split('_')
     try:
-        item = records.objects.get(part_number=part_number)
+        spare_item = spare_records.objects.filter(part_number=olo[0], model_id=olo[1])[0]
+        common = super_records.objects.filter(part_number=spare_item.part_number, model_id=spare_item.model_id)
     except:
-        item = None
+        spare_item = None
+        common = None
     
     p_id = part_number
         
     context = {
-        'item' : item,
+        'item' : spare_item,
+        'common' : common,
         'p_id' : p_id,
     }
 
     return render(request, 'spare_market/part_number_details.html', context)
 
 
-# def claim(request, part_id):
-#     item = records.objects.get(part_id=part_id)
-#     item.status_id = False
-#     item.save()
-#     return render(request, 'super_market/part_id_claim.html', {'item' : part_id})
+def update(request, part_number):
+    olo = part_number.split('_')
+    spare_item = spare_records.objects.filter(part_number=olo[0], model_id=olo[1])[0]
+    previous_stock = spare_item.stock
+    super_item = super_records.objects.filter(part_number=olo[0], model_id=olo[1], status_id=False)
+    spare_item.stock = spare_item.stock + int(olo[2])
+    if len(super_item) < spare_item.stock:
+        spare_item.stock = spare_item.stock - len(super_item)
+        super_item.update(status_id=True)
+    else:
+        if spare_item.stock > 0:
+            for i in super_item[:spare_item.stock]:
+                i.status_id=True
+                i.save()
+        spare_item.stock = 0
+    spare_item.save()
+
+    context = {
+        'item' : spare_item,
+        'previous_stock' : previous_stock,
+        }
+    return render(request, 'spare_market/part_number_update.html', context)
