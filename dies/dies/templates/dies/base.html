@@ -4,6 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
@@ -36,11 +37,12 @@
         {% comment %} a:visited {cursor: none !important; pointer-events: none;}  {% endcomment %}
         
     </style>
-  <body class="rotate90">     
+  {% comment %} <body class="rotate90">      {% endcomment %}
+  <body>     
     <!-- jQuery library -->
     <script src="{% static 'assets/jquery-3.5.1.min.js' %}"></script>
     <!-- Popper JS -->
-    <script src="{% static 'assets/popper.js/dist/umd/popper.min.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/popper.js/dist/umd/popper.min.js' %}"></script> {% endcomment %}
     <!-- Latest compiled JavaScript -->
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     {% comment %} {% if messages %}
@@ -70,6 +72,9 @@
 
 
     <script type="text/javascript">
+        $(document).ready(function(){
+          
+        });
         $(document).on('keydown', function(e) {
         });
 

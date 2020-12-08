@@ -1,0 +1,17 @@
+{% extends "dies/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="container mt-5 pt-5">
+    <h3 class="mt-5 text-center font-weight-bold border border-success rounded pt-2 pb-2">{{item.part_number}}</h3>
+    <h4 class="text-center text-success font-weight-bold">SUCCESFULLY UPDATED</h4>
+    <hr>
+    <h5 class="text-center font-weight-bold">Stock: {{previous_stock}} &#8594; {{item.stock}}</h5>
+  </div>
+  <script>
+    $(document).ready(function(){
+      setTimeout(function(){window.location.href = "{% url 'spare_data_input' %}";}, 3000);
+    });
+
+  </script>
+
+{% endblock content %}

@@ -86,16 +86,16 @@
     </div>
   </div>
   <div id="alertdiva" class="w-75 p-2 alert alert-danger" style="text-align: center; font-weight: bold; height: 40px; position: absolute; top: 180px; left: 40px; z-index: 10;">
-  Please Select an model
+  Please Select a Model Applicator
   </div>
 
   <script>
     $(document).ready(function(){
       $(".numpad").hide();
       $("#alertdiva").hide();
-      $('#model_button').html("MODEL");
-      {% comment %} $(".input").mask("9999-9999"); {% endcomment %}
-      $('.input').click(function(){
+      $('#model_button').html("MODEL");        
+    });
+    $('.input').click(function(){
         var model = $('#model_button').text().replace(/ /g,'').replace('\n', '');
         if (model == "MODEL"){
           $('#alertdiva').show().fadeOut(4000);
@@ -110,19 +110,21 @@
       $('.shuffle').click(function(){
         if ($('.input').val().length == 4) {
             $('.input').val($('.input').val() + "-" + $(this).text());
+        } else if ($('.input').val().length == 9) {
+
         } else {
             $('.input').val($('.input').val() + $(this).text());
         }
       });
       $('#search_part_number_btn').click(function(){
-        window.location.href="{% url 'part_number_details' part_number=1 %}".replace(/1/, $('.input').val().toString());
+        var part_number_with_model = $('.input').val().toString() + "_" + $('#model_button').text().replace(/ /g,'').replace('\n', '');
+        window.location.href="{% url 'part_number_details' part_number=1 %}".replace(/1/, part_number_with_model);
       });
       $('#clear_part_number_btn').click(function() {
         $('.input').val("");
         $('#model_button').html("MODEL");
         $('.numpad').fadeOut('fast');
-      });        
-    });
+      });
 
 
     function modelChange(val) {

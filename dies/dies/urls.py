@@ -18,4 +18,5 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('supermarket/', include('super_market.urls')),
     path('sparemarket/', include('spare_market.urls')),
+    path('inventory/', include('inventory.urls')),
 ]
