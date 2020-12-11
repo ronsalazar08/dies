@@ -94,8 +94,23 @@ def inventory(request):
     return render(request, 'inventory/inventory.html', context)
 
 
-
-
+def pi_per_entity(request):
+    mfg_list = super_records.objects.values('mfg_div').distinct().order_by('mfg_div')
+    entity_list = []
+    entity_total = [0,0]
+    for i in mfg_list:
+        mfg = super_records.objects.filter(mfg_div=i['mfg_div'])
+        mfg_true = mfg.filter(status_id=True).count()
+        entity_list.append([i['mfg_div'], mfg_true, mfg.count()])
+        entity_total[0] += mfg_true
+        entity_total[1] += mfg.count()
+    super_in_stock_percentage = (entity_total[0] / entity_total[1]) * 100
+    context = {
+        'entity_total' : entity_total,
+        'entity_list' : entity_list,
+        'super_in_stock_percentage' : super_in_stock_percentage,
+    }
+    return render(request, 'inventory/pi_per_entity.html', context)
 
 
 

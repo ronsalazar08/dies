@@ -1,0 +1,44 @@
+{% extends "dies/base.html" %}
+{% block content %}
+<div id="olo" style=" height: 430px; overflow: auto;">
+  <h4 class="text-center text-primary">STATUS PER ENTITY</h4>
+  <table class="table table-striped m-0 p-0" style="font-size:.6em;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="p-1">#</th>
+        <th scope="col" class="p-1">MFG-DIV</th>
+        <th scope="col" class="p-1">IN-STOCK</th>
+        <th scope="col" class="p-1">TOTAL</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in entity_list %}
+        <tr>
+            <td class="p-1">{{forloop.counter}}</td>
+            <th scope="row" class="p-1">{{i.0}}</th>
+            <td class="p-1">{{i.1}}</td>
+            <td class="p-1">{{i.2}}</td>
+        </tr>
+        {% if forloop.last %}
+            <tr class="bg-dark text-light">
+              <td colspan=2 class="p-1 font-weight-bold">TOTAL</td>
+              <td class="p-1 font-weight-bold">{{entity_total.0}}</td>
+              <td class="p-1 font-weight-bold">{{entity_total.1}}</td>
+            </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+  {% comment %} <button id="modal_up_button" class="btn btn-primary font-weight-bolder rounded-circle" style="position:fixed; bottom: 70px; right:5px;">
+    &#8593;
+  </button>
+  <button id="modal_down_button"  class="btn btn-primary font-weight-bolder rounded-circle" style="position:fixed; bottom: 20px; right:5px;">
+    &#8595;
+  </button> {% endcomment %}
+</div>
+  <script>
+    $(document).ready(function(){
+    });
+  </script>
+
+{% endblock content %}

@@ -34,6 +34,23 @@
       <div class="row justify-content-center">
         <button class="del btn btn-danger rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">X</button>
         <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">0</button>
+        <button class="btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">&nbsp;</button>
+      </div>
+    </div>
+    <div class="apad container">
+      <div class="row justify-content-center">
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">C</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">CC</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">DD</button>
+      </div>
+      <div class="row justify-content-center">
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">L</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">NI</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">TO</button>
+      </div>
+      <div class="row justify-content-center">
+        <button class="del btn btn-danger rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">X</button>
+        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">0</button>
         <button id="search_part_number_btn" class="btn btn-success rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">&check;</button>
       </div>
     </div>
@@ -91,7 +108,7 @@
 
   <script>
     $(document).ready(function(){
-      $(".numpad").hide();
+      $(".numpad, .apad").hide();
       $("#alertdiva").hide();
       $('#model_button').html("MODEL");        
     });
@@ -110,8 +127,10 @@
       $('.shuffle').click(function(){
         if ($('.input').val().length == 4) {
             $('.input').val($('.input').val() + "-" + $(this).text());
-        } else if ($('.input').val().length == 9) {
-
+        } else if ($('.input').val().length == 8) {
+            $('.input').val($('.input').val() + $(this).text());
+            $('.numpad').hide();
+            $('.apad').show();
         } else {
             $('.input').val($('.input').val() + $(this).text());
         }
