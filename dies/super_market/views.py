@@ -8,12 +8,27 @@ def data_input(request):
 
 
 def details(request, part_id):
+    if "_r" in part_id:
+        olo = part_id.split('_')
+        part_id = olo[0]
+        ar = True
+    else:
+        ar = False
     try:
         item = super_records.objects.get(part_id=part_id)
         common = super_records.objects.filter(part_number=item.part_number, model_id=item.model_id).exclude(part_id=item.part_id)
+        part_number_in_spare = spare_records.objects.filter(part_number=item.part_number, model_id=item.model_id)
+        if ar == True:
+            item.status_id=True
+            item.save()
+        if part_number_in_spare:
+            not_in_spare_market = False
+        else:
+            not_in_spare_market = True
     except:
         item = None
         common = None
+        not_in_spare_market = None
     
     p_id = part_id
         
@@ -21,6 +36,7 @@ def details(request, part_id):
         'item' : item,
         'common' : common,
         'p_id' : p_id,
+        'not_in_spare_market' : not_in_spare_market,
     }
 
     return render(request, 'super_market/part_id_details.html', context)
@@ -41,6 +57,7 @@ def claim(request, part_id):
     except:
         spare_item=None
         in_spare = False
+        previous_stock = 0
     super_item.save()
 
     context = {
@@ -48,6 +65,7 @@ def claim(request, part_id):
         'in_spare' : in_spare,
         'spare_item' : spare_item,
         'previous_stock' : previous_stock,
+        'p_id' : part_id,
     }
 
     return render(request, 'super_market/part_id_claim.html', context)

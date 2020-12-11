@@ -1,0 +1,77 @@
+{% extends "dies/base.html" %}
+{% block content %}
+  <div class="container mt-3">
+    <button class="row w-100 mx-auto btn btn-outline-success" style="height:115px;" onclick="goTo('{% url 'inventory_inventory' %}')">
+      <div class="col-12 mx-auto my-auto">
+        <h3 class="text-center">INVENTORY</h3>
+        <h4 class="text-center"></span></h4>
+      </div>
+    </button>
+    <hr>
+    <button class="row w-100 mx-auto btn btn-outline-primary" style="height:115px;">
+      <div class="col-12 mx-auto my-auto">
+        <h4 class="text-center">% PER PART ID</h4>
+        <h4 class="text-center text-dark">{{ super_in_stock_percentage|floatformat:2 }}% <span style="font-size: .6em;">In-Stock</span></h4>
+      </div>
+    </button>
+    <hr>
+    <button class="row w-100 mx-auto btn btn-outline-danger" style="height:115px;">
+      <div class="col-12 mx-auto my-auto">
+        <h4 class="text-center">% PER PART NO</h4>
+        <h4 class="text-center text-dark">{{ spare_in_stock_percentage|floatformat:2 }}% <span style="font-size: .6em;">No-Stock</span></h4>
+      </div>
+    </button>
+  </div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+    <div class="container border border-primary rounded">
+      <h3 class="text-center text-primary">SUPER MARKET</h3>
+      <h4 class="text-center">{{ super_in_stock_percentage|floatformat:2 }}% <span style="font-size: .6em;">In-Stock</span></h4>
+      <table class="table table-striped" style="font-size: .9em;">
+        <thead  style="font-size: .7em;">
+          <tr>
+            <th scope="col" class="pt-0 pb-0">MFG-DIV</th>
+            <th scope="col" class="pt-0 pb-0">IN-STOCK</th>
+            <th scope="col" class="pt-0 pb-0">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in entity_list %}
+            <tr>
+              <td class="pt-1 pb-0">{{i.0}}</td>
+              <td class="pt-1 pb-0">{{i.1}}</td>
+              <td class="pt-1 pb-0">{{i.2}}</td>
+            </tr>
+            {% if forloop.last %}
+              <tr class="bg-dark text-light">
+                <td class="font-weight-bold">TOTAL</td>
+                <td class="font-weight-bold">{{entity_total.0}}</td>
+                <td class="font-weight-bold">{{entity_total.1}}</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+{% endcomment %}

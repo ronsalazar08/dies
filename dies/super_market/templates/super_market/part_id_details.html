@@ -90,19 +90,19 @@
         </div>
       </div>
     </div>
-    
-    <div class="container mt-5">
+    <h6 class="text-danger m-0 p-0 text-center">{% if not_in_spare_market == True %}Part Number Not in Spare {% else %} <br>{% endif %}</h6>
+    <div class="container mt-4">
       <div class="row mt-3">
-        <div class="col-6 pl-0">
-          <button id="common_button" class="btn btn-info btn-block font-weight-bold" data-toggle="modal" data-target="#commonModal" data-backdrop="false">
-            COMMON TO
+        {% comment %} <div class="col-6 pl-0">
+          <button class="btn btn-info btn-block font-weight-bold" data-toggle="modal" data-target="#commonModal" data-backdrop="false">
+            COMMON
           </button>
         </div>
-        <div class="col-6 pr-0">
+        <div class="col-6 pr-0"> {% endcomment %}
           <button id="back_button" class="btn btn-danger btn-block font-weight-bold">
             BACK
           </button>
-        </div>
+        {% comment %} </div> {% endcomment %}
       </div>
       {% if item.status_id == True %}
         <div class="row  mt-3">
@@ -112,8 +112,8 @@
         </div>
       {% else %}
         <div class="row  mt-3">
-          <button class="btn btn-outline-primary btn-block font-weight-bold disabled">
-            CLAIM
+          <button class="btn btn-warning btn-block font-weight-bold text-light" data-toggle="modal" data-target="#restockModal" data-backdrop="false">
+            RE-STOCK
           </button>
         </div>
       {% endif %}
@@ -121,10 +121,39 @@
 
   {% endif %}
 
+    <!-- Modal For Re-stock -->
+    <div class="modal" id="restockModal" tabindex="-1" role="dialog" aria-labelledby="restockModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="height: 450px;">
+          <div class="modal-header">
+            <h5 class="modal-title">RE-STOCK</h5>
+          </div>
+          <div class="modal-body pt-5">
+            <h2 class="text-center">ARE YOU SURE?</h2>
+            <hr>
+            <div class="row mt-5 mb-4">
+              <div class="col-12">
+                <button id="restock_button" class="btn btn-success btn-block font-weight-bold" style="font-size:1.7em;" >
+                  YES
+                </button>
+              </div>
+            </div>
+            <hr>
+            <div class="row mt-4 mb-4">
+              <div class="col-12">
+                <button class="btn btn-danger btn-block font-weight-bold" style="font-size:1.7em;" data-dismiss="modal">
+                  NO
+                </button>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
 
-
-    <!-- Modal For common -->
-    <div class="modal fade" id="commonModal" tabindex="-1" role="dialog" aria-labelledby="commonModalTitle" aria-hidden="true">
+    {% comment %} <!-- Modal For common -->
+    <div class="modal" id="commonModal" tabindex="-1" role="dialog" aria-labelledby="commonModalTitle" aria-hidden="true" onmousedown="return false">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -133,7 +162,7 @@
               &times;
             </button>
           </div>
-          <div class="modal-body" style="font-size: 1.3em;">
+          <div class="modal-body" style="font-size: 1.3em; height: 400px; overflow: auto;">
             {% for c in common %}
               <div class="row pt-0 pb-0" >
                 <div class="col-12 text-center">
@@ -142,10 +171,19 @@
               </div>
               <hr>
             {% endfor %}
+            <button id="modal_up_button" class="btn btn-primary font-weight-bolder rounded-circle" style="position:fixed; bottom: 70px; right:10px;">
+              &#8593;
+            </button>
+            <button id="modal_down_button"  class="btn btn-primary font-weight-bolder rounded-circle" style="position:fixed; bottom: 20px; right:10px;">
+              &#8595;
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </div> {% endcomment %}
+
+
+    
   <script>
     $(document).ready(function(){
       if ("{{item}}" == "None"){
@@ -154,7 +192,13 @@
 
       $('#claim_button').click(function(){
         {% if item != None %}
-          window.location.href="{% url 'part_id_claim' part_id=item.part_id %}";
+            window.location.href="{% url 'part_id_claim' part_id=item.part_id %}";
+        {% endif %}
+      });
+
+      $('#restock_button').click(function(){
+        {% if item != None %}
+            window.location.href="{% url 'part_id_details' part_id=item.part_id|add:'_r' %}";
         {% endif %}
       });
 

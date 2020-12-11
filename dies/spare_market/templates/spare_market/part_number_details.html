@@ -42,18 +42,17 @@
       </div>
       <hr class="mt-1 mb-3">
       <h6 class="text-center">Additional</h6>
-      <div class="row">
-        <div class="col-1"></div>
-        <div class="col-3">
-          {% comment %} <button id="minus_button" class="btn btn-danger btn-block font-weight-bold p-2 {% if item.stock == 0 %}disabled{% endif %}"> {% endcomment %}
-          <button id="minus_button" class="btn btn-danger btn-block font-weight-bold disabled">
+      <div class="row" style="font-size: 3em;">
+        <div class="col-3 pt-4">
+          <button id="minus_button" class="btn btn-danger btn-block font-weight-bold p-2 {% if item.stock == 0 %}disabled{% endif %}" {% if item.stock == 0 %}disabled{% endif %}>
+          {% comment %} <button id="minus_button" class="btn btn-danger btn-block font-weight-bold disabled"> {% endcomment %}
             &minus;
           </button>
         </div>
-        <div class="col-4">
-          <input id="add_input" type="text" class="border border-dark rounded font-weight-bold w-100 text-center" style="font-size: 1.25em;" value="0">
+        <div class="col-6">
+          <input id="add_input" type="text" class="border border-dark rounded font-weight-bold w-100 text-center" value="0">
         </div>
-        <div class="col-3">
+        <div class="col-3 pt-4">
           <button id="plus_button" class="btn btn-primary btn-block font-weight-bold">
             &plus;
           </button>
@@ -61,11 +60,11 @@
       </div>
     </div>
     
-    <div class="container">
-      <div class="row">
+    <div class="container mt-5">
+      <div class="row mt-3">
         <div class="col-6 pl-0">
           <button id="common_button" class="btn btn-info btn-block font-weight-bold" data-toggle="modal" data-target="#commonModal" data-backdrop="false">
-            COMMON TO
+            USED IN
           </button>
         </div>
         <div class="col-6 pr-0">
@@ -123,18 +122,25 @@
       });
 
       $('#plus_button').click(function(){
-        $('#minus_button').removeClass( "disabled");
+        {% comment %} $('#minus_button').removeClass( "disabled"); {% endcomment %}
         $('#add_input').val(parseInt($('#add_input').val()) + 1);
+        {% if item != None %}
+          if ($('#add_input').val() >= -{{item.stock}}) {
+            $('#minus_button').removeClass("disabled").prop("disabled", false);
+          }
+        {% endif %}
       });
 
       $('#minus_button').click(function(){
-        {% comment %} $('#add_input').val(parseInt($('#add_input').val()) - 1); {% endcomment %}
-        if ($('#add_input').val() > 0) {
+        $('#add_input').val(parseInt($('#add_input').val()) - 1);
+        {% comment %} if ($('#add_input').val() > 0) {
           $('#add_input').val(parseInt($('#add_input').val()) - 1);
-        }
-        if ($('#add_input').val() <= 0) {
-          $(this).addClass("disabled");
-        }
+        } {% endcomment %}
+        {% if item != None %}
+          if ($('#add_input').val() <= -{{item.stock}}) {
+            $(this).addClass("disabled").prop("disabled", true);
+          }
+        {% endif %}
       });
 
       $('#back_button').click(function(){

@@ -1,0 +1,84 @@
+{% extends "dies/base1.html" %}
+{% block content %}
+  <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-6">
+        <div class="container border border-primary rounded">
+          <h3 class="text-center text-primary">SUPER MARKET</h3>
+          <h4 class="text-center">{{ super_in_stock_percentage|floatformat:2 }}% <span style="font-size: .6em;">In-Stock</span></h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">MFG-DIV</th>
+                <th scope="col">IN-STOCK</th>
+                <th scope="col">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in entity_list %}
+                <tr>
+                  <th scope="row">{{i.0}}</th>
+                  <td>{{i.1}}</td>
+                  <td>{{i.2}}</td>
+                </tr>
+                {% if forloop.last %}
+                  <tr class="bg-dark text-light">
+                    <td class="font-weight-bold">TOTAL</td>
+                    <td class="font-weight-bold">{{entity_total.0}}</td>
+                    <td class="font-weight-bold">{{entity_total.1}}</td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="container border border-danger rounded">
+          <h3 class="text-center text-danger">INVENTORY</h3>
+          {% comment %} <h4 class="text-center">{{ super_in_stock_percentage|floatformat:2 }}% <span style="font-size: .6em;">In-Stock</span></h4> {% endcomment %}
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">PART NUMBER</th>
+                <th scope="col">MODEL</th>
+                <th scope="col">SUPER</th>
+                <th scope="col">SPARE</th>
+                <th scope="col">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for key, i in dict_inv.items %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{i.part_number}}</td>
+                  <td>{{i.model}}</td>
+                  <td>{{i.super}}</td>
+                  <td>{{i.spare}}</td>
+                  <td>{{i.total}}</td>
+                </tr>
+                {% if forloop.last %}
+                  <tr class="bg-dark text-light">
+                    <td class="font-weight-bold text-center" colspan=3>TOTAL</td>
+                    <td class="font-weight-bold">{{inv_total.0}}</td>
+                    <td class="font-weight-bold">{{inv_total.1}}</td>
+                    <td class="font-weight-bold">{{inv_total.2}}</td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function(){
+    });
+  </script>
+
+
+{% endblock content %}

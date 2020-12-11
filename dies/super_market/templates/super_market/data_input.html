@@ -41,7 +41,7 @@
 
 
   <!-- Modal For Entity -->
-  <div class="modal fade" id="entityModal" tabindex="-1" role="dialog" aria-labelledby="entityModalTitle" aria-hidden="true">
+  <div class="modal" id="entityModal" tabindex="-1" role="dialog" aria-labelledby="entityModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content" style="height: 400px;">
         <div class="modal-header">
@@ -51,14 +51,14 @@
           </button>
         </div>
         <div class="modal-body pt-5">
-            <div class="row mt-4 mb-4">
+            <div class="row mt-2 mb-4">
               <div class="col-6">
-                <button class="btn btn-danger btn-block font-weight-bold" style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                <button class="btn btn-danger btn-block font-weight-bold" style="font-size:1.7em;" data-dismiss="modal" onclick="entityChange(this)" >
                   YTM
                 </button>
               </div>
               <div class="col-6">
-                <button class="btn btn-primary btn-block font-weight-bold" style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                <button class="btn btn-primary btn-block font-weight-bold" style="font-size:1.7em;" data-dismiss="modal" onclick="entityChange(this)" >
                   YTP
                 </button>
               </div>
@@ -66,30 +66,30 @@
             <hr>
             <div class="row mt-4 mb-4">
               <div class="col-6">
-                <button class="btn btn-success btn-block font-weight-bold" style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                <button class="btn btn-success btn-block font-weight-bold" style="font-size:1.7em;" data-dismiss="modal" onclick="entityChange(this)" >
                   YTC
                 </button>
               </div>
               <div class="col-6">
-                <button class="btn btn-warning btn-block font-weight-bold text-light" style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                <button class="btn btn-warning btn-block font-weight-bold text-light" style="font-size:1.7em;" data-dismiss="modal" onclick="entityChange(this)" >
                   YTL
                 </button>
               </div>
             </div>
             <hr>
-            <div class="row mt-4 mb-4">
+            <div class="row mt-4">
               <div class="col-4 p-0 pl-2 pr-2">
-                <button class="btn btn-secondary btn-block font-weight-bold " style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                <button class="btn btn-secondary btn-block font-weight-bold " style="font-size:1.7em;" data-dismiss="modal" onclick="entityChange(this)" >
                   T-T
                 </button>
               </div>
               <div class="col-4 p-0 pl-2 pr-2">
-                <button class="btn btn-info btn-block font-weight-bold " style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                <button class="btn btn-info btn-block font-weight-bold " style="font-size:1.7em;" data-dismiss="modal" onclick="entityChange(this)" >
                   TYC
                 </button>
               </div>
               <div class="col-4 p-0 pl-2 pr-2">
-                <button class="btn btn-dark btn-block font-weight-bold " style="font-size:1.25em;" data-dismiss="modal" onclick="entityChange(this)" >
+                <button class="btn btn-dark btn-block font-weight-bold " style="font-size:1.7em;" data-dismiss="modal" onclick="entityChange(this)" >
                   TYP
                 </button>
               </div>
@@ -113,7 +113,7 @@
           $('#alertdiva').show().fadeOut(4000);
           $('.numpad').hide();
         } else {
-          $('.numpad').fadeToggle('fast');
+          $('.numpad').show();
         }
       });
       $('.del').click(function(){
@@ -128,7 +128,7 @@
       $('#clear_part_id_btn').click(function() {
         $('.input').val("");
         $('#entity_button').html("ENTITY");
-        $('.numpad').fadeOut('fast');
+        $('.numpad').hide();
       });        
     });
 
@@ -137,7 +137,7 @@
       var value = $(val).text().replace(/ /g,'').replace('\n', '');
       $('#entity_button').html(value);
       $('.input').val(value + "CD");
-      $('.numpad').show('5000');
+      $('.numpad').show();
     }
   </script>
 

@@ -5,6 +5,7 @@ from spare_market.models import records
 
 admin.site.unregister(Group)
 admin.site.unregister(User)
+admin.site.site_url = "/inventory/all"
 
 @admin.register(records)
 class recordsAdmin(admin.ModelAdmin):

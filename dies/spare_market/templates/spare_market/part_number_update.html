@@ -9,7 +9,9 @@
   </div>
   <script>
     $(document).ready(function(){
-      setTimeout(function(){window.location.href = "{% url 'spare_data_input' %}";}, 3000);
+      {% comment %} setTimeout(function(){window.location.href = "{% url 'spare_data_input' %}";}, 3000); {% endcomment %}
+      setTimeout(function(){window.location.href="{% url 'part_number_details' part_number=1 %}".replace(/1/, "{{p_id}}");}, 3000);
+
     });
 
   </script>

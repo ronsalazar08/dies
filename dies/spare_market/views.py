@@ -47,5 +47,6 @@ def update(request, part_number):
     context = {
         'item' : spare_item,
         'previous_stock' : previous_stock,
+        'p_id' : olo[0]+'_'+olo[1],
         }
     return render(request, 'spare_market/part_number_update.html', context)

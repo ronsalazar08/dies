@@ -41,7 +41,7 @@
 
 
   <!-- Modal For model -->
-  <div class="modal fade" id="modelModal" tabindex="-1" role="dialog" aria-labelledby="modelModalTitle" aria-hidden="true">
+  <div class="modal" id="modelModal" tabindex="-1" role="dialog" aria-labelledby="modelModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content" style="height: 400px;">
         <div class="modal-header">
@@ -51,14 +51,14 @@
           </button>
         </div>
         <div class="modal-body pt-5">
-            <div class="row mt-5 mb-5">
+            <div class="row mt-4 mb-4">
               <div class="col-6">
-                <button class="btn btn-danger btn-block font-weight-bold" style="font-size:1em;" data-dismiss="modal" onclick="modelChange(this)" >
+                <button class="btn btn-danger btn-block font-weight-bold" style="font-size:2em;" data-dismiss="modal" onclick="modelChange(this)" >
                   04
                 </button>
               </div>
               <div class="col-6">
-                <button class="btn btn-primary btn-block font-weight-bold" style="font-size:1em;" data-dismiss="modal" onclick="modelChange(this)" >
+                <button class="btn btn-primary btn-block font-weight-bold" style="font-size:2em;" data-dismiss="modal" onclick="modelChange(this)" >
                   87
                 </button>
               </div>
@@ -66,17 +66,17 @@
             <hr>
             <div class="row mt-5 mb-5">
               <div class="col-4 p-0 pl-2 pr-2">
-                <button class="btn btn-success btn-block font-weight-bold" style="font-size:1em;" data-dismiss="modal" onclick="modelChange(this)" >
+                <button class="btn btn-success btn-block font-weight-bold" style="font-size:2em;" data-dismiss="modal" onclick="modelChange(this)" >
                   90
                 </button>
               </div>
               <div class="col-4 p-0 pl-2 pr-2">
-                <button class="btn btn-warning btn-block font-weight-bold text-light" style="font-size:1em;" data-dismiss="modal" onclick="modelChange(this)" >
+                <button class="btn btn-warning btn-block font-weight-bold text-light" style="font-size:2em;" data-dismiss="modal" onclick="modelChange(this)" >
                   K2
                 </button>
               </div>
               <div class="col-4 p-0 pl-2 pr-2">
-                <button class="btn btn-secondary btn-block font-weight-bold text-light" style="font-size:1em;" data-dismiss="modal" onclick="modelChange(this)" >
+                <button class="btn btn-secondary btn-block font-weight-bold text-light" style="font-size:2em;" data-dismiss="modal" onclick="modelChange(this)" >
                   BC
                 </button>
               </div>
@@ -85,7 +85,7 @@
       </div>
     </div>
   </div>
-  <div id="alertdiva" class="w-75 p-2 alert alert-danger" style="text-align: center; font-weight: bold; height: 40px; position: absolute; top: 180px; left: 40px; z-index: 10;">
+  <div id="alertdiva" class="w-75 p-2 alert alert-danger" style="text-align: center; font-weight: bold; height: 60px; position: absolute; top: 180px; left: 40px; z-index: 10;">
   Please Select a Model Applicator
   </div>
 
@@ -101,7 +101,7 @@
           $('#alertdiva').show().fadeOut(4000);
           $('.numpad').hide();
         } else {
-          $('.numpad').fadeToggle('fast');
+          $('.numpad').show();
         }
       });
       $('.del').click(function(){
@@ -123,14 +123,14 @@
       $('#clear_part_number_btn').click(function() {
         $('.input').val("");
         $('#model_button').html("MODEL");
-        $('.numpad').fadeOut('fast');
+        $('.numpad').hide();
       });
 
 
     function modelChange(val) {
       var value = $(val).text().replace(/ /g,'').replace('\n', '');
       $('#model_button').html(value);
-      $('.numpad').show('5000');
+      $('.numpad').show();
     }
   </script>
 
