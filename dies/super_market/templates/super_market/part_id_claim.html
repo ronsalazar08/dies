@@ -4,28 +4,19 @@
   <div class="container mt-5 pt-5">
     <h3 class="mt-5 text-center font-weight-bold border border-success rounded pt-2 pb-2">{{super_item.part_id}}</h3>
     <h4 class="text-center text-success font-weight-bold">SUCCESFULLY CLAIMED</h4>
-    {% if in_spare == False %}
-      <h5 class="text-center text-danger font-weight-bold">Now Un-Available.
+    
+      <h4 class=" text-dark font-weight-bold">
         <hr class="p-0 m-0">
-        <span class="text-dark">Part #: {{super_item.part_number}}</span>
+        Part #: {{super_item.part_number}}
         <hr class="p-0 m-0">
-        <span class="text-dark">Model:{{super_item.model_id}}</span>
+        Model:{{super_item.model_id}}
         <hr class="p-0 m-0">
-        NOT in Spare Market.
-      </h5>
-    {% else %}
-      {% if previous_stock > 0 %}
-        <h4 class="text-center text-success font-weight-bold">Still Available.</h4>
-        <h4 class=" text-dark font-weight-bold">
-          <span class="text-primary">PART #: </span> {{spare_item.part_number}}
-          <hr class="p-0 m-0">
-          <span class="text-primary">STOCK : </span> {{previous_stock}} &#8594; {{spare_item.stock}}
-        </h4>
-      {% else %}
-        <h4 class="text-center text-danger font-weight-bold">Now Un-Available.</h4>
-        <h6 class="text-center text-primary font-weight-bold">NO more STOCK in Spare Market.</h6>
-      {% endif %}
-    {% endif %}
+        {% if in_spare == False %}
+          <span class="text-danger" style="font-size:.85em;"> NOT in Spare Market.</span>
+        {% else %}
+          Spare Market : {{spare_item.stock}}
+        {% endif %}
+      </h4>
   </div>
   <script>
     $(document).ready(function(){

@@ -1,0 +1,48 @@
+{% extends "dies/base.html" %}
+{% block content %}
+<div id="olo" style=" height: 430px; overflow: auto;">
+  <h5 class="text-center text-danger">STATUS PER PART NUMBER</h5>
+  <table class="table table-striped m-0 p-0" style="font-size:.6em;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="p-1">#</th>
+        <th scope="col" class="p-1">PART NO</th>
+        <th scope="col" class="p-1">MOD</th>
+        <th scope="col" class="p-1">SUP</th>
+        <th scope="col" class="p-1">TOT</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for key, i in dict_inv.items %}
+      {% if forloop.first %}
+          <tr class="bg-dark text-light">
+            <td class="p-1 font-weight-bold text-center" colspan=3>TOTAL</td>
+            <td class="p-1 font-weight-bold">{{inv_total.0}}</td>
+            <td class="p-1 font-weight-bold">{{inv_total.1}}</td>
+          </tr>
+        {% endif %}
+        <tr>
+          <td class="p-1">{{forloop.counter}}</td>
+          <td class="p-1">{{i.part_number}}</td>
+          <td class="p-1">{{i.model}}</td>
+          <td class="p-1">{{i.super}}</td>
+          <td class="p-1">{{i.total}}</td>
+        </tr>
+        
+      {% endfor %}
+      
+    </tbody>
+  </table>
+  <button id="modal_up_button" class="btn btn-primary font-weight-bolder rounded-circle" style="position:fixed; bottom: 70px; right:5px;">
+    &#8593;
+  </button>
+  <button id="modal_down_button"  class="btn btn-primary font-weight-bolder rounded-circle" style="position:fixed; bottom: 20px; right:5px;">
+    &#8595;
+  </button>
+</div>
+  <script>
+    $(document).ready(function(){
+    });
+  </script>
+
+{% endblock content %}

@@ -4,12 +4,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
-    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'index/style.css' %}"> {% endcomment %}
-    <link rel="icon" type="image/png" href="{% static 'assets/logo.gif' %}">
+    <link rel="stylesheet" href="{% static 'dies/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'dies/assets/logo.gif' %}">
     <title> &#65279; </title>
   </head>
   <style>
@@ -45,45 +43,82 @@
           -ms-overflow-style: none;  /* IE and Edge */
           scrollbar-width: none;  /* Firefox */
         }
-        {% comment %} a:link {cursor: none !important;}    /* unvisited link, same as regular 'a' */ {% endcomment %}
-        {% comment %} a:hover {cursor: none !important;}   /* mouse over link */ {% endcomment %}
-        {% comment %} a:focus {cursor: none !important;}   /* link has focus */ {% endcomment %}
-        {% comment %} a:active {cursor: none !important;  pointer-events: none;}  /* selected link */ {% endcomment %}
-        {% comment %} a:visited {cursor: none !important; pointer-events: none;}  {% endcomment %}
-        
+
+
+        {% comment %} ::-webkit-scrollbar {
+            width: 12px;
+        } {% endcomment %}
+
+        {% comment %} /* Track */
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.5); 
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+        } {% endcomment %}
+
     </style>
   <body class="rotate90">     
-  {% comment %} <body>      {% endcomment %}
     <!-- jQuery library -->
-    <script src="{% static 'assets/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'dies/assets/jquery-3.5.1.min.js' %}"></script>
     <!-- Popper JS -->
-    {% comment %} <script src="{% static 'assets/popper.js/dist/umd/popper.min.js' %}"></script> {% endcomment %}
+    <script src="{% static 'dies/assets/popper.js/dist/umd/popper.min.js' %}"></script>
     <!-- Latest compiled JavaScript -->
-    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
-    {% comment %} {% if messages %}
-        {% for message in messages %}
-            <div id="alertdiv" class="w-25 p-2 alert alert-{{ message.tags }}" style="text-align: center; font-weight: bold; height: 40px; position: absolute; top: 78px; right: 509px; z-index: 10;">
-                {{message}}
-            </div>
-            <script>
-                $(document).ready(function(){
-                    $("#alertdiv").fadeOut(5000);
-                });
-            </script>
-        {% endfor %}
-    {% endif %} {% endcomment %}
+    <script src="{% static 'dies/assets/bootstrap/js/bootstrap.min.js' %}"></script>
 
     <div class="container-fluid">
       <h5 class="text-center font-weight-bold" style="font-size:.65em;">
-      <button onclick="goTo('{% url 'homepage' %}')" class="btn btn-block font-weight-bold p-0" style="font-size: 1em;">
-        <img src="{% static 'assets/ttech_logo.png' %}" width="30" height="30">
+      {% comment %} <button onclick="goTo('{% url 'homepage' %}')" class="btn btn-block font-weight-bold p-0" style="font-size: 1em;"> {% endcomment %}
+      <button class="btn btn-block font-weight-bold p-0" style="font-size: 1em;" data-toggle="modal" data-target=".homeModal" data-backdrop="false" >
+        <img src="{% static 'dies/assets/ttech_logo.png' %}" width="30" height="30">
         &nbsp;
         TORRES TECHNOLOGY CENTER CORPORATION
       </button>
       </h5>
+      <!-- Modal For home -->
+      <div class="modal homeModal" tabindex="-1" role="dialog" aria-labelledby="homeModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content" style="height: 460px;">
+           <div class="modal-header p-1">
+              <button class="close btn" data-dismiss="modal" aria-label="Close">
+                &times;
+              </button>
+            </div>
+            <div class="modal-body pt-5">
+              <div class="row mt-5 mb-5">
+                <div class="col-12">
+                  <button class="btn btn-success btn-block font-weight-bold" style="font-size:2em;" data-dismiss="modal" onclick="goTo('{% url 'homepage' %}')" >
+                    HOME PAGE
+                  </button>
+                </div>
+              </div>
+              <hr>
+              <div class="row mt-5 mb-5 pt-5">
+                <div class="col-12">
+                  <a class="btn btn-danger btn-block font-weight-bold text-light" style="font-size:2em;" href={% url 'shutdown' %} >
+                    POWER OFF
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       {% block content %}
       {% endblock %}
+      
     </div>
+
+    
+
+
 
 
     <script type="text/javascript">

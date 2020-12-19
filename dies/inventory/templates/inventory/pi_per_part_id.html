@@ -1,0 +1,51 @@
+{% extends "dies/base.html" %}
+{% block content %}
+<div id="olo" style=" height: 430px; overflow: auto;">
+  <h4 class="text-center text-primary">STATUS PER PART ID</h4>
+  <table class="table table-striped m-0 p-0" style="font-size:.4em;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="p-1">PART ID</th>
+        <th scope="col" class="p-1">PART #</th>
+        <th scope="col" class="p-1">MOD</th>
+        {% comment %} <th scope="col" class="p-1">CAR</th> {% endcomment %}
+        {% comment %} <th scope="col" class="p-1">MAC</th> {% endcomment %}
+        <th scope="col" class="p-1">MFG</th>
+        <th scope="col" class="p-1">STK</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in super_rec %}
+        {% if forloop.first %}
+            <tr class="bg-dark text-light" style="font-size:1.2em;">
+              <td colspan=4 class="p-1 font-weight-bold">TOTAL</td>
+              <td class="p-1 font-weight-bold">{{pi_total.0}}</td>
+              {% comment %} <td class="p-1 font-weight-bold">{{pi_total.1}}</td> {% endcomment %}
+            </tr>
+        {% endif %}
+        <tr>
+            <th class="p-1 font-weight-bold" style="font-size:1.35em;">{{i.part_id}}</th>
+            <td class="p-1">{{i.part_number}}</td>
+            <td class="p-1">{{i.model_id}}</td>
+            {% comment %} <td class="p-1">{{i.car_model}}</td> {% endcomment %}
+            {% comment %} <td class="p-1">{{i.machine_no}}</td> {% endcomment %}
+            <td class="p-1">{{i.mfg_div}}</td>
+            <td style="font-size:1.35em;" class="p-1{% if i.status_id == False %} font-weight-bold text-danger">0{% else %}">1{% endif %}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <button id="modal_up_button" class="btn btn-primary font-weight-bolder rounded-circle" style="position:fixed; bottom: 70px; right:5px;">
+    &#8593;
+  </button>
+  <button id="modal_down_button"  class="btn btn-primary font-weight-bolder rounded-circle" style="position:fixed; bottom: 20px; right:5px;">
+    &#8595;
+  </button>
+</div>
+  <script>
+    $(document).ready(function(){
+    });
+  </script>
+
+{% endblock content %}

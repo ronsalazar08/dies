@@ -1,0 +1,22 @@
+{% extends "dies/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <div class="container mt-5 pt-5">
+    <div class="row mt-5 mb-5">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <button onclick="goTo('{% url 'inventory_pi_per_entity' %}')" class="btn btn-outline-primary btn-block font-weight-bold" style="font-size:1.25em;">PER ENTITY</button>
+      </div>
+    </div>
+    <hr>
+    <div class="row mt-5 mb-5">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <button onclick="goTo('{% url 'inventory_pi_per_part_id' %}')" class="btn btn-outline-danger btn-block font-weight-bold" style="font-size:1.25em;">PER PART ID</button>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+{% endblock content %}

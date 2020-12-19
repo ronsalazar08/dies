@@ -8,14 +8,14 @@
       </div>
     </button>
     <hr>
-    <button class="row w-100 mx-auto btn btn-outline-primary" style="height:115px;" onclick="goTo('{% url 'inventory_pi_per_entity' %}')">
+    <button class="row w-100 mx-auto btn btn-outline-primary" style="height:115px;" onclick="goTo('{% url 'inventory_pi_per' %}')">
       <div class="col-12 mx-auto my-auto">
         <h4 class="text-center">% PER PART ID</h4>
         <h4 class="text-center text-dark">{{ super_in_stock_percentage|floatformat:2 }}% <span style="font-size: .6em;">In-Stock</span></h4>
       </div>
     </button>
     <hr>
-    <button class="row w-100 mx-auto btn btn-outline-danger" style="height:115px;">
+    <button class="row w-100 mx-auto btn btn-outline-danger" style="height:115px;" onclick="goTo('{% url 'inventory_per_part_number' %}')">
       <div class="col-12 mx-auto my-auto">
         <h4 class="text-center">% PER PART NO</h4>
         <h4 class="text-center text-dark">{{ spare_in_stock_percentage|floatformat:2 }}% <span style="font-size: .6em;">No-Stock</span></h4>

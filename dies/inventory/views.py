@@ -51,6 +51,10 @@ def status(request):
     return render(request, 'inventory/status.html', context)
 
 
+def pi_per(request):
+    return render(request, 'inventory/pi_per.html')
+
+
 def inventory(request):
     spare_rec = spare_records.objects.all()
     super_rec = super_records.objects.all()
@@ -113,7 +117,62 @@ def pi_per_entity(request):
     return render(request, 'inventory/pi_per_entity.html', context)
 
 
+def pi_per_part_id(request):
+    super_rec = super_records.objects.all()
+    pi_total = [0,0]
+    for i in super_rec:
+        status_id = 0
+        if i.status_id == True:
+            status_id = 1
+        pi_total[0] += status_id
+        pi_total[1] += 1
+    context = {
+        'super_rec' : super_rec,
+        'pi_total' : pi_total,
+    }
+    return render(request, 'inventory/pi_per_part_id.html', context)
 
+
+def per_part_number(request):
+    super_rec = super_records.objects.all()
+    spare_rec = spare_records.objects.all()
+    
+    dict_inv = {}
+    inv_total = [0,0]
+    
+    for i in super_rec:
+        status_id = 0
+        if i.status_id == True:
+            status_id = 1
+        if i.part_number + '_' + i.model_id not in dict_inv:
+            dict_inv[i.part_number + '_' + i.model_id] = {}
+            dict_inv[i.part_number + '_' + i.model_id]['part_number'] = i.part_number
+            dict_inv[i.part_number + '_' + i.model_id]['model'] = i.model_id
+            dict_inv[i.part_number + '_' + i.model_id]['super'] = status_id
+            dict_inv[i.part_number + '_' + i.model_id]['total'] = 1
+        else:
+            dict_inv[i.part_number + '_' + i.model_id]['super'] += status_id
+            dict_inv[i.part_number + '_' + i.model_id]['total'] += status_id
+
+    for key ,value in dict_inv.items(): 
+        if value and 'super' and 'total' in value.keys():
+            val = 0
+            if value['super'] >= 1:
+                value['super'] = 1
+                val = 1
+            if value['total'] >= 1:
+                value['total'] = 1
+                tot = 1
+
+            inv_total[0] += val
+            inv_total[1] += tot  
+    
+    context = {
+        'inv_total' : inv_total,
+        'dict_inv' : dict_inv,
+    }
+    
+    return render(request, 'inventory/per_part_number.html', context)
 
 
 
