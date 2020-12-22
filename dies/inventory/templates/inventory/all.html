@@ -1,7 +1,141 @@
 {% extends "dies/base1.html" %}
 {% block content %}
   <div class="container-fluid mt-3">
-    <div class="row">
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-inventory-tab" data-toggle="tab" href="#nav-inventory" role="tab" aria-controls="nav-inventory" aria-selected="true">INVENTORY</a>
+        <a class="nav-item nav-link" id="nav-superentity-tab" data-toggle="tab" href="#nav-superentity" role="tab" aria-controls="nav-superentity" aria-selected="false">SUPER MARKET PER ENTITY</a>
+        <a class="nav-item nav-link" id="nav-superpartid-tab" data-toggle="tab" href="#nav-superpartid" role="tab" aria-controls="nav-superpartid" aria-selected="false">SUPER MARKET PER PART ID</a>
+      </div>
+    </nav>
+    <div class="tab-content border-bottom border-left border-right p-3" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-inventory" role="tabpanel" aria-labelledby="nav-inventory-tab" style="height:450px; overflow:auto;">
+        <h3 class="text-center text-danger">INVENTORY</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">PART NUMBER</th>
+              <th scope="col">MODEL</th>
+              <th scope="col">SUPER</th>
+              <th scope="col">SPARE</th>
+              <th scope="col">TOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for key, i in dict_inv.items %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.part_number}}</td>
+                <td>{{i.model}}</td>
+                <td>{{i.super}}</td>
+                <td>{{i.spare}}</td>
+                <td>{{i.total}}</td>
+              </tr>
+              {% if forloop.last %}
+                <tr class="bg-dark text-light">
+                  <td class="font-weight-bold text-center" colspan=3>TOTAL</td>
+                  <td class="font-weight-bold">{{inv_total.0}}</td>
+                  <td class="font-weight-bold">{{inv_total.1}}</td>
+                  <td class="font-weight-bold">{{inv_total.2}}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+            
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="nav-superentity" role="tabpanel" aria-labelledby="nav-superentity-tab" style="height:450px; overflow:auto;">
+      <h3 class="text-center text-primary">SUPERMARKET PER ENTITY</h3>
+      <h6 class="text-center">{{ super_in_stock_percentage|floatformat:2 }}% <span style="font-size: .6em;">In-Stock</span></h6>
+      {% comment %} <div class="row mt-1">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+          <h3 class="text-center text-primary">SUPERMARKET PER ENTITY</h3>
+        </div>
+        <div class="col-4">
+          <h5 class="text-center">{{ super_in_stock_percentage|floatformat:2 }}% <span style="font-size: .6em;">In-Stock</span></h5>
+        </div>
+      </div> {% endcomment %}
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col" class="pt-1 pb-1">MFG-DIV</th>
+                <th scope="col" class="pt-1 pb-1">IN-STOCK</th>
+                <th scope="col" class="pt-1 pb-1">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in entity_list %}
+                <tr>
+                  <th scope="row" class="pt-1 pb-1">{{i.0}}</th>
+                  <td class="pt-1 pb-1">{{i.1}}</td>
+                  <td class="pt-1 pb-1">{{i.2}}</td>
+                </tr>
+                {% if forloop.last %}
+                  <tr class="bg-dark text-light">
+                    <td class="font-weight-bold pt-1 pb-1">TOTAL</td>
+                    <td class="font-weight-bold pt-1 pb-1">{{entity_total.0}}</td>
+                    <td class="font-weight-bold pt-1 pb-1">{{entity_total.1}}</td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+              
+            </tbody>
+          </table>
+      </div>
+      <div class="tab-pane fade" id="nav-superpartid" role="tabpanel" aria-labelledby="nav-superpartid-tab" style="height:450px; overflow:auto;">
+         <h3 class="text-center text-danger">SUPERMARKET PER PART ID</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">PART ID</th>
+              <th scope="col">PART NUMBER</th>
+              <th scope="col">MODEL</th>
+              <th scope="col">MFG DIV</th>
+              <th scope="col">STOCK</th>
+              <th scope="col">REQUIRED</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in super_rec %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.part_id}}</td>
+                <td>{{i.part_number}}</td>
+                <td>{{i.model}}</td>
+                <td>{{i.mfg_div}}</td>
+                <td>{% if i.status_id == True %}1{% else %}0{% endif %}</td>
+                <td>1</td>
+              </tr>
+              {% if forloop.last %}
+                <tr class="bg-dark text-light">
+                  <td class="font-weight-bold text-center" colspan=4>TOTAL</td>
+                  <td class="font-weight-bold">{{entity_total.0}}</td>
+                  <td class="font-weight-bold">{{entity_total.1}}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-12">
+        <a class="btn btn-primary  float-right">DOWNLOAD</a>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+    {% comment %} <div class="row">
       <div class="col-6">
         <div class="container border border-primary rounded">
           <h3 class="text-center text-primary">SUPER MARKET</h3>
@@ -37,7 +171,6 @@
       <div class="col-6">
         <div class="container border border-danger rounded">
           <h3 class="text-center text-danger">INVENTORY</h3>
-          {% comment %} <h4 class="text-center">{{ super_in_stock_percentage|floatformat:2 }}% <span style="font-size: .6em;">In-Stock</span></h4> {% endcomment %}
           <table class="table table-striped">
             <thead>
               <tr>
@@ -73,8 +206,7 @@
           </table>
         </div>
       </div>
-    </div>
-  </div>
+    </div> {% endcomment %}
   <script>
     $(document).ready(function(){
     });

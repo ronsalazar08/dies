@@ -50,7 +50,7 @@
       </div>
       <div class="row justify-content-center">
         <button class="del btn btn-danger rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">X</button>
-        <button class="shuffle btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">0</button>
+        <button class="btn btn-dark rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;"></button>
         <button id="search_part_number_btn" class="btn btn-success rounded m-2 font-weight-bold" style="width:2.5em; font-size: 1.75em;">&check;</button>
       </div>
     </div>
@@ -122,7 +122,13 @@
         }
       });
       $('.del').click(function(){
-        $('.input').val($('.input').val().substring(0,$('.input').val().length - 1));
+        if ($('.input').val().length <= 9) {
+          $('.input').val($('.input').val().substring(0,$('.input').val().length - 1));
+          $('.numpad').show();
+          $('.apad').hide();
+        } else {
+          $('.input').val($('.input').val().substring(0,$('.input').val().length - 1));
+        }
       });
       $('.shuffle').click(function(){
         if ($('.input').val().length == 4) {
@@ -149,7 +155,10 @@
     function modelChange(val) {
       var value = $(val).text().replace(/ /g,'').replace('\n', '');
       $('#model_button').html(value);
+      if ($('.apad').is(":hidden")){
       $('.numpad').show();
+
+      }
     }
   </script>
 

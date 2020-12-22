@@ -30,10 +30,28 @@
             </script>
         {% endfor %}
     {% endif %} {% endcomment %}
+    <style>
+      /* width */
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 2px;
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: gray; 
+        border-radius: 10px;
+      }
+    </style>
 
     <div class="container-fluid">
       <h5 class="text-center font-weight-bold" style="font-size:.65em;">
-      <button onclick="goTo('{% url 'homepage' %}')" class="btn btn-block font-weight-bold p-0" style="font-size: 1em;">
+      <button onclick="goTo('{% url 'admin:index' %}')" class="btn btn-block font-weight-bold p-0" style="font-size: 1em;">
         <img src="{% static 'dies/assets/ttech_logo.png' %}" width="30" height="30">
         &nbsp;
         TORRES TECHNOLOGY CENTER CORPORATION

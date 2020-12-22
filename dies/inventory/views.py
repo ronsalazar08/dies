@@ -226,6 +226,7 @@ def all(request):
         'super_in_stock_percentage' : super_in_stock_percentage,
         'inv_total' : inv_total,
         'dict_inv' : dict_inv,
+        'super_rec' : super_rec,
     }
     
     return render(request, 'inventory/all.html', context)
